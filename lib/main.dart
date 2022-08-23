@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:folio/provider/themeProvider.dart';
 import 'package:folio/provider/themeStyles.dart';
 import 'package:folio/sections/aboutus/aboutus.dart';
@@ -20,14 +21,15 @@ import 'sections/commitee/districtcommitee.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: "aivfenv.env");
   await Firebase.initializeApp(
       options: FirebaseOptions(
-          apiKey: "AIzaSyBSB7MqrTNRNk8PeHFSNCtJCvPZNYm5NTQ",
-          authDomain: "aivfup-b0d8c.firebaseapp.com",
-          projectId: "aivfup-b0d8c",
-          storageBucket: "aivfup-b0d8c.appspot.com",
-          messagingSenderId: "556882285048",
-          appId: "1:556882285048:web:08432800eeebf3378bc60d"));
+          apiKey: dotenv.env['APIKEY']!,
+          authDomain: dotenv.env['AUTHDOMAIN']!,
+          projectId: dotenv.env['PROJECTID']!,
+          storageBucket: dotenv.env['STORAGEBUCKET']!,
+          messagingSenderId: dotenv.env['MESSAGINGSENDERID']!,
+          appId: dotenv.env['APPID']!));
 
   setPathUrlStrategy();
   runApp(MyApp());
